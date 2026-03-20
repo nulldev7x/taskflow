@@ -1,8 +1,14 @@
-﻿const Database = require('better-sqlite3');
+const Database = require('better-sqlite3');
 const path = require('path');
 
-const db = new Database(path.join(__dirname, 'taskflow.db'));
+let dbPath;
+if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+  dbPath = '/tmp/taskflow.db';
+} else {
+  dbPath = path.join(__dirname, 'taskflow.db');
+}
 
+const db = new Database(dbPath);
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
