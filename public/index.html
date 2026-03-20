@@ -1,1 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/utils.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <h1>Task<span>Flow</span></h1>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="btn-icon" title="Alternar Tema">🌙</button>
+                <div class="user-info" id="user-info">
+                    <div class="avatar"></div>
+                    <span id="username-display">...</span>
+                    <button id="logout-btn" class="btn-logout" title="Sair">Sair</button>
+                </div>
+            </div>
+        </header>
 
+        <main>
+            <section class="search-panel">
+                <input type="text" id="task-search" placeholder="🔍 Buscar tarefas..." autocomplete="off">
+            </section>
+            <section class="dashboard">
+                <div class="card stat-card">
+                    <h3>Total</h3>
+                    <p id="stat-total">0</p>
+                </div>
+                <div class="card stat-card">
+                    <h3>Pendentes</h3>
+                    <p id="stat-pending">0</p>
+                </div>
+                <div class="card stat-card">
+                    <h3>Concluídas</h3>
+                    <p id="stat-completed">0</p>
+                </div>
+            </section>
+
+            <section class="task-form-panel">
+                <button id="toggle-form-btn" class="btn-primary btn-add-toggle">
+                    <span>+</span> Nova Tarefa
+                </button>
+                <div id="new-task-container" class="form-container">
+                    <div class="card">
+                        <h3>O que vamos fazer hoje?</h3>
+                        <div class="form-group">
+                            <input type="text" id="task-title" placeholder="Título da tarefa...">
+                            <textarea id="task-desc" placeholder="Adicione alguns detalhes..."></textarea>
+                            <button id="add-task-btn" class="btn-primary">Criar Tarefa 🚀</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="task-list-panel">
+                <div class="list-header">
+                    <h2>Minhas Tarefas</h2>
+                    <div class="filters">
+                        <button class="filter-btn active" data-filter="all">Todas</button>
+                        <button class="filter-btn" data-filter="pending">Pendentes</button>
+                        <button class="filter-btn" data-filter="completed">Concluídas</button>
+                    </div>
+                </div>
+                <div id="task-list" class="task-list"></div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Desenvolvido com ❤️ por <a href="https://github.com/nulldev7x" target="_blank">nulldev7x</a></p>
+        </footer>
+    </div>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content card">
+            <h3>Editar Tarefa</h3>
+            <div class="form-group">
+                <input type="hidden" id="edit-task-id">
+                <input type="text" id="edit-task-title" placeholder="Título">
+                <textarea id="edit-task-desc" placeholder="Descrição"></textarea>
+                <div class="modal-actions">
+                    <button id="save-edit-btn" class="btn-primary">Salvar</button>
+                    <button id="close-modal-btn" class="btn-secondary">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content card confirm-card">
+            <h3 id="confirm-title">Tem certeza?</h3>
+            <p id="confirm-message">Esta ação não pode ser desfeita.</p>
+            <div class="modal-actions">
+                <button id="confirm-yes-btn" class="btn-primary btn-danger">Sim, Excluir</button>
+                <button id="confirm-no-btn" class="btn-secondary">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

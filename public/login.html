@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="js/utils.js"></script>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-side-info">
+            <h2>Organize seu dia.</h2>
+            <p>Simplifique suas tarefas e foque no que realmente importa com o TaskFlow.</p>
+        </div>
+        <div class="auth-form-side">
+            <h1>Task<span>Flow</span></h1>
+            <h3>Bem-vindo de volta!</h3>
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Usuário">
+                <input type="password" id="password" placeholder="Senha">
+                <button id="login-btn" class="btn-primary">Entrar na Conta</button>
+                <p class="auth-footer">Não tem conta? <a href="register.html">Cadastre-se grátis</a></p>
+            </div>
+            <footer>
+                <p>Desenvolvido com ❤️ por <a href="https://github.com/nulldev7x" target="_blank">nulldev7x</a></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        initTheme();
+
+        document.getElementById('login-btn').onclick = async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showToast('Login realizado! Redirecionando...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 1000);
+            } else {
+                showToast(data.error || 'Erro ao entrar', 'error');
+            }
+        };
+
+        document.querySelector('.auth-footer a').onclick = (e) => {
+            e.preventDefault();
+            const url = e.target.href;
+            document.querySelector('.auth-container').classList.add('fade-out');
+            setTimeout(() => { window.location.href = url; }, 500);
+        };
+    </script>
+</body>
+</html>
