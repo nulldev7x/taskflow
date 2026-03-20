@@ -1,13 +1,8 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 
-let dbPath;
-if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
-  dbPath = '/tmp/taskflow.db';
-} else {
-  dbPath = path.join(__dirname, 'taskflow.db');
-}
-
+// No Render, usamos a pasta do projeto normalmente
+const dbPath = path.join(__dirname, 'taskflow.db');
 const db = new Database(dbPath);
 
 db.exec(`

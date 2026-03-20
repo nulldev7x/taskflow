@@ -1,20 +1,21 @@
 const express = require('express');
-const session = require('express-session');
+const cookieSession = require('cookie-session');
 const bcrypt = require('bcryptjs');
 const db = require('./database');
 const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 
 app.use(express.json());
 app.use(express.static('public'));
-app.use(session({
-  secret: 'taskflow-secret-key',
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['taskflow-secret-key'],
+  maxAge: 24 * 60 * 60 * 1000 
 }));
+
 
 app.post('/api/auth/register', (req, res) => {
   const { username, password } = req.body;
