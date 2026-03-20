@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+taskflow.db-journal
+# Se quiser que cada um tenha seu próprio banco vazio, descomente a linha abaixo:
+# taskflow.db
